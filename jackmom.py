@@ -45,13 +45,13 @@ def main():
     ret,thresh = cv2.threshold(imgray,150,255,cv2.THRESH_BINARY)
     im2, contours, hierarchy = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     cv2.drawContours(invertedimage, contours, -1, (0,255,0), 3)
-    cnt = []
-    for range(len(contours)) in contours:
-        x+1
-        cnt.append(contours[cont])
+   
 
-    epsilon = 0.1*cv2.arcLength(cnt,True)
-    approx = cv2.approxPolyDP(cnt,epsilon,True)
+    for c in contours:
+        epsilon = 0.1* cv2.arcLength(c, True)
+        approx = cv2.approxPolyDP(c, epsilon, True)
+
+    cv2.drawContours(filteredImage, [approx], -1, (0, 255, 0), 4)
     cv2.drawContours(invertedimage, [approx], -1, (0,255,0), 3)
     cv2.imshow("mamacita", filteredImage)
     
