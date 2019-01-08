@@ -40,19 +40,21 @@ def main():
     filteredImage = cv2.erode(finalImage, kernel, iterations = 1)
     filteredImage = cv2.dilate(finalImage, np.ones((3,3),np.uint8), iterations = 3)
     invertedimage = cv2.bitwise_not(filteredImage)
-    imgray = cv2.cvtColor(filteredImage,cv2.COLOR_BGR2GRAY)
-    #ret,thresh = cv2.threshold(imgray,127,255,0)
-    ret,thresh = cv2.threshold(imgray,150,255,cv2.THRESH_BINARY)
+    imhsv = cv2.cvtColor(filteredImage,cv2.COLOR_BGR2GRAY)
+    #ret,thresh = cv2.threshold(ixmgray,127,255,0)
+    ret,thresh = cv2.threshold(imhsv,150,255,cv2.THRESH_BINARY)
     im2, contours, hierarchy = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     cv2.drawContours(invertedimage, contours, -1, (0,255,0), 3)
-    cnt = []
-    for range(len(contours)) in contours:
-        x+1
-        cnt.append(contours[cont])
+   
 
-    epsilon = 0.1*cv2.arcLength(cnt,True)
-    approx = cv2.approxPolyDP(cnt,epsilon,True)
+    for c in contours:
+        epsilon = 0.1* cv2.arcLength(c, True)
+        approx = cv2.approxPolyDP(c, epsilon, True)
+
+    cv2.drawContours(filteredImage, [approx], -1, (0, 255, 0), 4)
     cv2.drawContours(invertedimage, [approx], -1, (0,255,0), 3)
+    cv2.drawContours(imhsv, [approx], -1, (0,255,0), 3)
+    cv2.imshow("hsv", imhsv)
     cv2.imshow("mamacita", filteredImage)
     
     cv2.imshow("end result", invertedimage)
