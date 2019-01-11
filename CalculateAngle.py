@@ -69,7 +69,7 @@ def main():
     xB = sys.maxsize
     yB = -1
     for i in range(len(cnt)):
-        if(getX(cnt, i) < xB or ((getY(cnt, i) == xB) and getY(cnt, i) > yB)):
+        if(getX(cnt, i) < xB or ((getX(cnt, i) == xB) and getY(cnt, i) > yB)):
             xB=getX(cnt,i)
             yB=getY(cnt,i)
     #circle all points
